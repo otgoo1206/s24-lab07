@@ -12,6 +12,8 @@ public class Frogger {
     private int position;
     
     // Field for task 2. Anything to add/change?
+    //firstName, lastName, phoneNumber, zipCode, state, gender гэсэн 6
+    // тусдаа хувьсагч байгаа нь Long Parameter List асуудлыг үүсгэж байна.
     private final Records records;
     private String firstName, lastName, phoneNumber, zipCode, state, gender;
 
@@ -44,16 +46,15 @@ public class Frogger {
     }
 
     // TODO: Do you notice any issues here?
+    //Road класст isOccupied болон isValid методыгоо өгсөн тул Frogger хамаарал багатай болсон.
     public boolean isOccupied(int position) {
-        boolean[] occupied = this.road.getOccupied();
-        return occupied[position];
+        return road.isOccupied(position);
     }
     
     public boolean isValid(int position) {
-        if (position < 0) return false;
-        boolean[] occupied = this.road.getOccupied();
-        return position < occupied.length;
+        return road.isValid(position);
     }
+    
 
     /**
      * Records Frogger to the list of records.
@@ -61,8 +62,9 @@ public class Frogger {
      * @return true if record successful, else false.
      */
     public boolean recordMyself() {
-      boolean success = records.addRecord(firstName, lastName, phoneNumber, zipCode, state, gender);
-      return success;
+        FroggerID froggerID = new FroggerID(firstName, lastName, phoneNumber, zipCode, state, gender);
+        return records.addRecord(froggerID);
     }
+    
 
 }
